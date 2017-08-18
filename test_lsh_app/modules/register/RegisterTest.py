@@ -79,7 +79,7 @@ class RegisterTest():
         a = (amount / float(i))*100
         ws.write(i, 9, "%.2f" % a + "%")
         print "case通过率为%.2f" % a + "%"
-        resultTime = time.strftime('%Y-%m-%d_%H:%M:%S')
+        resultTime = time.strftime('%Y-%m-%d')
         #wb.save(os.path.dirname(os.getcwd()) + '/appTestResults/registerTestResult_' + resultTime + '.xls')
         wb.save(self.testResultsPath + 'registerTestResult_' + resultTime + '.xls')
         print "---------------注册接口测试结束---------------"
