@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//test_lsh_app/base/AppBase.py=utf-8
+encoding//test_lsh_app/base/AppBasic.py=utf-8
+encoding//test_lsh_app/base/AppRunSystemEnv.py=utf-8
+encoding//test_lsh_app/base/DB.py=utf-8
+encoding//test_lsh_app/base/RequestRule.py=utf-8
+encoding//test_lsh_app/base/TestCase.py=utf-8
+encoding//test_lsh_app/modules/homepage/HomePageTest.py=utf-8
+encoding//test_lsh_app/modules/login/LoginTest.py=utf-8
+encoding//test_lsh_app/modules/register/RegisterTest.py=utf-8
+encoding//test_lsh_app/runtest/TestApp.py=utf-8
