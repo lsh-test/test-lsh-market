@@ -54,7 +54,7 @@ class TestApp(unittest.TestCase):
         appBase=AppBase(self.enveriment,self.appConfpath,"mypage")
         
         testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
-        mypageTest=HomePageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        mypageTest=MyPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         mypageTest.MyPageTest()
         
     
