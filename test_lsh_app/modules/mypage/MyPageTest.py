@@ -53,5 +53,5 @@ class MyPageTest():
         print "case通过率为%.2f" % a + "%"
         resultTime = time.strftime('%Y-%m-%d')
         #wb.save(os.path.dirname(os.getcwd()) + '/appTestResults/loginTestResult' + resultTime + '.xls')
-        wb.save(self.testResultsPath + 'HomePageTestResult_' + resultTime + '.xls')
+        wb.save(self.testResultsPath + 'MyPageTestResult_' + resultTime + '.xls')
         print "---------------app我的页面测试结束---------------"

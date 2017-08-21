@@ -46,6 +46,10 @@ class AppBase:
         elif self.module=='homepage':
             testCaseDoc=cf.get("test_case_doc","homepageCase")
             return testCaseDoc
+        elif self.module=="mypage":
+            testCaseDoc=cf.get("test_case_doc","mypageCase")
+            return testCaseDoc
+            
             
         else :
             print "testcase不存在!"

@@ -11,7 +11,7 @@ from test_lsh_app.modules.register.RegisterTest import RegisterTest
 from test_lsh_app.modules.mypage.MyPageTest import MyPageTest
 from test_lsh_app.modules.homepage.HomePageTest import HomePageTest
 
-base_dir=str(os.path.dirname(os.path.dirname(__file__)))
+#base_dir=str(os.path.dirname(os.path.dirname(__file__)))
 
 
 class TestApp(unittest.TestCase):
@@ -44,7 +44,6 @@ class TestApp(unittest.TestCase):
     #测试app首页
     def testHomePage(self):
         appBase=AppBase(self.enveriment,self.appConfpath,"homepage")
-        
         testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
         homepageTest=HomePageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         homepageTest.HomePageTest()
@@ -53,20 +52,20 @@ class TestApp(unittest.TestCase):
     def testMyPage(self):
         appBase=AppBase(self.enveriment,self.appConfpath,"mypage")
         
-        testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
+        testCaseDoc = appBase.getTestCaseDoc()#获得我的页面testcase文件
         mypageTest=MyPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         mypageTest.MyPageTest()
         
     
     
     
-    def createsuite(self):
+    """ def createsuite(self):
         testunit=unittest.TestSuite()
         discover=unittest.defaultTestLoader.discover(base_dir,pattern='test*.py', top_level_dir=None)
         for test_suite in discover:
             for testsuit in test_suite:
                 testunit.addTest(testsuit)
-        return testunit
+        return testunit"""
         
 if __name__ == '__main__':
     suite = unittest.TestSuite()
