@@ -11,9 +11,8 @@ from test_lsh_app.modules.register.RegisterTest import RegisterTest
 
 from test_lsh_app.modules.homepage.HomePageTest import HomePageTest
 
-base_dir=str(os.path.dirname(__file__))
+base_dir=str(os.path.dirname(os.path.dirname(__file__)))
 
-print base_dir
 
 class TestApp(unittest.TestCase):
     def setUp(self):
@@ -55,7 +54,7 @@ class TestApp(unittest.TestCase):
     
     def createsuite(self):
         testunit=unittest.TestSuite()
-        discover=unittest.defaultTestLoader.discover(base_dir,pattern='.*Test.py', top_level_dir=None)
+        discover=unittest.defaultTestLoader.discover(base_dir,pattern='test*.py', top_level_dir=None)
         for test_suite in discover:
             for testsuit in test_suite:
                 testunit.addTest(testsuit)
