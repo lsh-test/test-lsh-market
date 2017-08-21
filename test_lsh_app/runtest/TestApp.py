@@ -8,7 +8,7 @@ from test_lsh_app.base.AppBase import AppBase
 from test_lsh_app.base.AppRunSystemEnv import AppRunSystemEnv
 from test_lsh_app.modules.login.LoginTest import LoginTest
 from test_lsh_app.modules.register.RegisterTest import RegisterTest
-
+from test_lsh_app.modules.mypage.MyPageTest import MyPageTest
 from test_lsh_app.modules.homepage.HomePageTest import HomePageTest
 
 base_dir=str(os.path.dirname(os.path.dirname(__file__)))
@@ -49,6 +49,14 @@ class TestApp(unittest.TestCase):
         homepageTest=HomePageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         homepageTest.HomePageTest()
         
+    #测试我的页面
+    def testMyPage(self):
+        appBase=AppBase(self.enveriment,self.appConfpath,"mypage")
+        
+        testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
+        mypageTest=HomePageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        mypageTest.MyPageTest()
+        
     
     
     
@@ -65,8 +73,7 @@ if __name__ == '__main__':
     suite.addTest(TestApp("testLogin"))
     suite.addTest(TestApp("testRegister"))
     suite.addTest(TestApp("testHomePage"))
-    
-    
+    suite.addTest(TestApp("testMyPage"))
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
