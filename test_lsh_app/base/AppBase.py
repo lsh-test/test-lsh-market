@@ -49,7 +49,13 @@ class AppBase:
         elif self.module=="mypage":
             testCaseDoc=cf.get("test_case_doc","mypageCase")
             return testCaseDoc
-            
+        elif self.module=="shopping_cart_page":
+            testCaseDoc=cf.get("test_case_doc","shopping_cart_pageCase")
+            return testCaseDoc
+        elif self.module=="classifypage":
+            testCaseDoc=cf.get("test_case_doc","classifypageCase")
+            return testCaseDoc
+        
             
         else :
             print "testcase不存在!"
