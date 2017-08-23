@@ -49,6 +49,7 @@ class ClassifyPageTest():
                 print "第%d条用例failure" % i
                 ws.write(i, 6, resultText)
         a = (amount / float(i))*100
+        
         ws.write(i, 9, "%.2f" % a + "%")
         print "case通过率为%.2f" % a + "%"
         resultTime = time.strftime('%Y-%m-%d')
