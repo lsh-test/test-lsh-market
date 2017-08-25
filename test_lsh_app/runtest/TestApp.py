@@ -2,9 +2,12 @@
 import os
 import sys
 import unittest
-
+ 
+reload(sys)
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
-from test_lsh_app.base.AppBase import AppBase
+
+
+from test_lsh_app.base.AppBase import AppBase  
 from test_lsh_app.base.AppRunSystemEnv import AppRunSystemEnv
 from test_lsh_app.modules.login.LoginTest import LoginTest
 from test_lsh_app.modules.register.RegisterTest import RegisterTest
@@ -57,7 +60,7 @@ class TestApp(unittest.TestCase):
         testCaseDoc = appBase.getTestCaseDoc()#获得我的页面testcase文件
         mypageTest=MyPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         mypageTest.MyPageTest()
-        
+    #测试购物车页面接口
     def testShoppingCartPage(self):
         
         appBase=AppBase(self.enveriment,self.appConfpath,"shopping_cart_page")
@@ -65,7 +68,7 @@ class TestApp(unittest.TestCase):
         testCaseDoc = appBase.getTestCaseDoc()#获得购物车页面testcase文件
         shoppingCartpageTest=ShoppingCartPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         shoppingCartpageTest.ShoppingCartPageTest()
-    
+    #测试分类页接口
     def testClassifyPage(self):
         
         appBase=AppBase(self.enveriment,self.appConfpath,"classifypage")

@@ -34,6 +34,7 @@ class ClassifyPageTest():
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
+                
                 results = requestRule.get(self.host, url, params)
                 
             resultTime = results[0]
