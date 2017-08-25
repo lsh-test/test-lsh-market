@@ -4,22 +4,21 @@ from test_lsh_mis.base.MisBase import MisBase
 
 
 class MisBasic():
-    def __init__(self,environment,path):
-        self.environment = environment
+    def __init__(self,host,path):
+        self.host = host
         self.path = path
 
     def getCookie(self):
-        misBase = MisBase(self.environment,"",self.path)
-        host = misBase.getHost()
+        misBase = MisBase("","",self.path)
         email = misBase.getEmail()
         password = misBase.getPassword()
         params = {'email': email, 'pwd': password}
-        result = requests.post(host + '/account/user/checklogin', params = params)
+        result = requests.post(self.host + '/account/user/checklogin', params = params)
         cookies = result.headers.get('Set-Cookie')
         return cookies
 
     def getVerifyCode(self,username):
-        misBase = MisBase(self.environment, "", self.path)
+        misBase = MisBase("", "", self.path)
         misHost = misBase.getHost()
         headers = {'Cookie': self.getCookie()}
         result = requests.get(misHost + '/customermanage/user/searchverify?cellphone=' + username, headers=headers)
