@@ -55,8 +55,6 @@ class AppBase:
         elif self.module=="classifypage":
             testCaseDoc=cf.get("test_case_doc","classifypageCase")
             return testCaseDoc
-        
-            
         else :
             print "testcase不存在!"
 

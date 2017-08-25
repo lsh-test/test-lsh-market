@@ -9,8 +9,10 @@ from test_lsh_app.base.AppBasic import AppBasic
 
 requestRule = RequestRule() 
 class ClassifyPageTest():
-    def __init__(self,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+    def __init__(self,enverionment,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+        self.enverionment = enverionment
         self.host = host
+        self.appConfPath = appConfPath
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
         self.testResultsPath = testResultsPath
@@ -34,7 +36,9 @@ class ClassifyPageTest():
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
-                
+                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                token = appBasic.getToken()
+                print token
                 results = requestRule.get(self.host, url, params)
                 
             resultTime = results[0]

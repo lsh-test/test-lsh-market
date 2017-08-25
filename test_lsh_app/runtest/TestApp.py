@@ -21,12 +21,12 @@ from test_lsh_app.modules.classifypage.ClassifyPageTest import ClassifyPageTest
 
 class TestApp(unittest.TestCase):
     def setUp(self):
-        self.enveriment = sys.argv[1]  # app环境
+        self.enverionment = sys.argv[1]  # app环境
         appSysPath = AppRunSystemEnv()
         self.appConfpath = appSysPath.getPath(sys.argv[2])[0] #appConf路径
         self.testCasePath = appSysPath.getPath(sys.argv[2])[1] #appTestCase路径
         self.testResultsPath = appSysPath.getPath(sys.argv[2])[2] #appTestResults路径
-        appBase = AppBase(self.enveriment,self.appConfpath,"")
+        appBase = AppBase(self.enverionment,self.appConfpath,"")
         self.host = appBase.getHost()
 
     def tearDown(self):
@@ -34,47 +34,47 @@ class TestApp(unittest.TestCase):
 
     #测试登录
     def testLogin(self):
-        appBase = AppBase(self.enveriment,self.appConfpath,"login")
+        appBase = AppBase(self.enverionment,self.appConfpath,"login")
         testCaseDoc = appBase.getTestCaseDoc()#获得登录testcase文件
         loginTest = LoginTest(self.host,self.testCasePath,testCaseDoc,self.testResultsPath)#登录测试
         loginTest.loginTest()
 
     #测试注册
     def testRegister(self):
-        appBase = AppBase(self.enveriment,self.appConfpath,"register")
+        appBase = AppBase(self.enverionment,self.appConfpath,"register")
         testCaseDoc = appBase.getTestCaseDoc()#获得注册testcase文件
         registerTest = RegisterTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)#注册测试
         registerTest.registerTest()
         
     #测试app首页
     def testHomePage(self):
-        appBase=AppBase(self.enveriment,self.appConfpath,"homepage")
+        appBase=AppBase(self.enverionment,self.appConfpath,"homepage")
         testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
-        homepageTest=HomePageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        homepageTest=HomePageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         homepageTest.HomePageTest()
         
     #测试我的页面
     def testMyPage(self):
-        appBase=AppBase(self.enveriment,self.appConfpath,"mypage")
+        appBase=AppBase(self.enverionment,self.appConfpath,"mypage")
         
         testCaseDoc = appBase.getTestCaseDoc()#获得我的页面testcase文件
-        mypageTest=MyPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        mypageTest=MyPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         mypageTest.MyPageTest()
     #测试购物车页面接口
     def testShoppingCartPage(self):
         
-        appBase=AppBase(self.enveriment,self.appConfpath,"shopping_cart_page")
+        appBase=AppBase(self.enverionment,self.appConfpath,"shopping_cart_page")
         
         testCaseDoc = appBase.getTestCaseDoc()#获得购物车页面testcase文件
-        shoppingCartpageTest=ShoppingCartPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        shoppingCartpageTest=ShoppingCartPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         shoppingCartpageTest.ShoppingCartPageTest()
     #测试分类页接口
     def testClassifyPage(self):
         
-        appBase=AppBase(self.enveriment,self.appConfpath,"classifypage")
+        appBase=AppBase(self.enverionment,self.appConfpath,"classifypage")
         
         testCaseDoc = appBase.getTestCaseDoc()#获得分类页面testcase文件
-        classifyPageTest=ClassifyPageTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        classifyPageTest=ClassifyPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         classifyPageTest.ClassifyPageTest()
     
     """ def createsuite(self):

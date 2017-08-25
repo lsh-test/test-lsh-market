@@ -9,7 +9,8 @@ from test_lsh_app.base.AppBasic import AppBasic
 
 requestRule = RequestRule()
 class HomePageTest():
-    def __init__(self,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+    def __init__(self,enverionment,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+        self.enverionment = enverionment
         self.host = host
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
