@@ -58,15 +58,15 @@ class ShoppingCartPageTest():
             ws.write(i, 7, resultTime)
             status = sheet.cell(i, 5).value
             if resultStatus == status:
-                print "第%d条用例pass" % i
+                print "第%d条用例:pass" % i
                 ws.write(i, 6, "pass")
                 amount += 1
             else:
-                print "第%d条用例failure" % i
+                print "第%d条用例:failure" % i
                 ws.write(i, 6, resultText)
         a = (amount / float(i))*100
         ws.write(i, 9, "%.2f" % a + "%")
-        print "case通过率为%.2f" % a + "%"
+        print "case通过率为:%.2f" % a + "%"
         resultTime = time.strftime('%Y-%m-%d')
         #wb.save(os.path.dirname(os.getcwd()) + '/appTestResults/loginTestResult' + resultTime + '.xls')
         wb.save(self.testResultsPath + 'ShoppingCartPageTestResult_' + resultTime + '.xls')

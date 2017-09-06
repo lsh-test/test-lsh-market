@@ -44,6 +44,8 @@ class RegisterTest():
                     misBasic = MisBasic("qa",misConfPath)
                     verifyCode = misBasic.getVerifyCode(cellphone)
                     params['verify_code'] = verifyCode
+                    
+                    #print verifyCode
                 ws.write(i, 4, json.dumps(params))
                 results = requestRule.post(self.host, url, params)
             # get请求
