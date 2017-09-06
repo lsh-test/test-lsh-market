@@ -32,20 +32,23 @@ class ClassifyPageTest():
             # post请求
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
+                
+                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                token = appBasic.getToken()
                 results = requestRule.post(self.host, url, params)
+                
+                
+                
+                
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
-<<<<<<< HEAD
-                token=AppBasic("qa","zyb")
-                token=token.getToken()
-                results = requestRule.get(self.host, url, token)
-=======
+                
                 appBasic = AppBasic(self.enverionment,self.appConfPath)
                 token = appBasic.getToken()
-                print token
-                results = requestRule.get(self.host, url, params)
->>>>>>> branch 'zhaoyb' of https://github.com/lsh-test/test-lsh-market
+                results = requestRule.get(self.host, url,params+token)
+                
+                
                 
             resultTime = results[0]
             resultStatus = results[1]

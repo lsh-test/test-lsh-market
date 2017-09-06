@@ -12,6 +12,7 @@ class MyPageTest():
     def __init__(self,enverionment,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
         self.enverionment = enverionment
         self.host = host
+        self.appConfPath = appConfPath
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
         self.testResultsPath = testResultsPath
@@ -31,11 +32,17 @@ class MyPageTest():
             # post请求
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
+                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                token = appBasic.getToken()
+                params[token]=token
                 results = requestRule.post(self.host, url, params)
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
-                results = requestRule.get(self.host, url, params)
+                
+                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                token = appBasic.getToken()
+                results = requestRule.get(self.host, url, params+token)
                 
             resultTime = results[0]
             resultStatus = results[1]
