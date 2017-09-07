@@ -9,10 +9,10 @@ from test_lsh_h5.base.H5Basic import H5Basic
 
 requestRule = RequestRule() 
 class ClassifyPageTest():
-    def __init__(self,enverionment,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+    def __init__(self,enverionment,host,h5ConfPath,testCasePath,testCaseDoc,testResultsPath):
         self.enverionment = enverionment
         self.host = host
-        self.appConfPath = appConfPath
+        self.h5ConfPath = appConfPath
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
         self.testResultsPath = testResultsPath
@@ -33,7 +33,7 @@ class ClassifyPageTest():
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
                 
-                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                appBasic = AppBasic(self.enverionment,self.h5ConfPath)
                 token = appBasic.getToken()
                 results = requestRule.post(self.host, url, params)
                 
@@ -42,7 +42,7 @@ class ClassifyPageTest():
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
                 
-                appBasic = AppBasic(self.enverionment,self.appConfPath)
+                appBasic = AppBasic(self.enverionment,self.h5ConfPath)
                 token = appBasic.getToken()
                 results = requestRule.get(self.host, url,params+token)
                 
