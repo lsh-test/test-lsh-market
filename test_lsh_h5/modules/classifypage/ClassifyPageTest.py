@@ -3,9 +3,9 @@ import time
 import os
 
 from xlutils.copy import copy
-from test_lsh_app.base.TestCase import TestCase
-from test_lsh_app.base.RequestRule import RequestRule
-from test_lsh_app.base.AppBasic import AppBasic
+from test_lsh_h5.base.TestCase import TestCase
+from test_lsh_h5.base.RequestRule import RequestRule
+from test_lsh_h5.base.H5Basic import H5Basic
 
 requestRule = RequestRule() 
 class ClassifyPageTest():

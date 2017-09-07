@@ -19,6 +19,8 @@ class LoginTest():
 
     def loginTest(self):
         print "---------------登录接口测试开始---------------"
+        h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
+        session = h5Basic.getCookie()
         testCase = TestCase()
         excel = testCase.getH5TestCase(self.testCasePath,self.testCaseDoc)
         sheet = excel.sheets()[0]
@@ -32,16 +34,11 @@ class LoginTest():
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
                 
-                h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
-                session = h5Basic.getCookie()
-                
                 results = requestRule.post(session,self.host, url, params)
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
                 
-                h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
-                session = h5Basic.getCookie()
                 results = requestRule.get(session,self.host, url, params)
                 
             resultTime = results[0]

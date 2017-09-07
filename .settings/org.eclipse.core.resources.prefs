@@ -18,6 +18,7 @@ encoding//test_lsh_h5/base/H5Basic.py=utf-8
 encoding//test_lsh_h5/base/H5RunSystemEnv.py=utf-8
 encoding//test_lsh_h5/base/RequestRule.py=utf-8
 encoding//test_lsh_h5/base/TestCase.py=utf-8
+encoding//test_lsh_h5/modules/classifypage/ClassifyPageTest.py=utf-8
 encoding//test_lsh_h5/modules/homepage/HomePageTest.py=utf-8
 encoding//test_lsh_h5/modules/login/LoginTest.py=utf-8
 encoding//test_lsh_h5/runtest/TestH5.py=utf-8
