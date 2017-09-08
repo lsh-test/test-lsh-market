@@ -40,7 +40,7 @@ class TestApp(unittest.TestCase):
     def testRegister(self):
         h5Base = H5Base(self.enverionment,self.h5Confpath,"register")
         testCaseDoc = h5Base.getTestCaseDoc()#获得注册testcase文件
-        registerTest = RegisterTest(self.host,self.h5Confpath,self.testCasePath,testCaseDoc,self.testResultsPath)#注册测试
+        registerTest = RegisterTest(self.enverionment,self.host,self.h5Confpath,self.testCasePath,testCaseDoc,self.testResultsPath)#注册测试
         registerTest.registerTest()
         
     #测试app首页
@@ -84,8 +84,9 @@ class TestApp(unittest.TestCase):
         
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    suite.addTest(TestApp("testLogin"))
-    suite.addTest(TestApp("testHomePage"))
+    #suite.addTest(TestApp("testLogin"))
+    #suite.addTest(TestApp("testHomePage"))
+    suite.addTest(TestApp("testRegister"))
     
     '''suite.addTest(TestApp("testRegister"))
     suite.addTest(TestApp("testHomePage"))

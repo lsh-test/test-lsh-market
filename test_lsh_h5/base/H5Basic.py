@@ -23,7 +23,7 @@ class H5Basic:
         result = session.post(host + '/account/user/ajaxlogin', params = params)
         if result.json()['ret'] == 1004 :
             #请求验证码
-            requests.post(host + '/captcha/sms/sendVerifyUnusual?cellphone=' + username)
+            requests.post(host + '/captcha/sms/sendregister?cellphone=' + username)
             misPath = self.path.replace('h5','mis')
             #misHost = 'http://qa.market-mis.wmdev2.lsh123.com'
             misBasic = MisBasic(self.enverionment,misPath)

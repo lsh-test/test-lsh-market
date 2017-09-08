@@ -3,16 +3,16 @@ import time
 import os
 
 from xlutils.copy import copy
-from test_lsh_app.base.TestCase import TestCase
-from test_lsh_app.base.RequestRule import RequestRule
-from test_lsh_app.base.AppBasic import AppBasic
+from test_lsh_h5.base.TestCase import TestCase
+from test_lsh_h5.base.RequestRule import RequestRule
+from test_lsh_h5.base.H5Basic import H5Basic
 
 requestRule = RequestRule()
 class MyPageTest():
-    def __init__(self,enverionment,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+    def __init__(self,enverionment,host,h5ConfPath,testCasePath,testCaseDoc,testResultsPath):
         self.enverionment = enverionment
         self.host = host
-        self.appConfPath = appConfPath
+        self.h5ConfPath = h5ConfPath
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
         self.testResultsPath = testResultsPath
@@ -20,8 +20,10 @@ class MyPageTest():
 
     def MyPageTest(self):
         print "---------------app我的页面测试开始---------------"
+        h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
+        session = h5Basic.getCookie()
         testCase = TestCase()
-        excel = testCase.getAppTestCase(self.testCasePath,self.testCaseDoc)
+        excel = testCase.getH5TestCase(self.testCasePath,self.testCaseDoc)
         sheet = excel.sheets()[0]
         nrows = sheet.nrows
         wb = copy(excel)
@@ -32,17 +34,14 @@ class MyPageTest():
             # post请求
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
-                appBasic = AppBasic(self.enverionment,self.appConfPath)
-                token = appBasic.getToken()
-                params[token]=token
-                results = requestRule.post(self.host, url, params)
+                
+                results = requestRule.post(session,self.host, url, params)
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
                 
-                appBasic = AppBasic(self.enverionment,self.appConfPath)
-                token = appBasic.getToken()
-                results = requestRule.get(self.host, url, params+token)
+                 
+                results = requestRule.get(session,self.host, url, params)
                 
             resultTime = results[0]
             resultStatus = results[1]

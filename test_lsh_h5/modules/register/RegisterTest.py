@@ -5,24 +5,28 @@ import time
 import os
 
 from xlutils.copy import copy
-from test_lsh_app.base.DB import DB
-from test_lsh_app.base.TestCase import TestCase
-from test_lsh_app.base.RequestRule import RequestRule
+from test_lsh_h5.base.DB import DB
+from test_lsh_h5.base.TestCase import TestCase
+from test_lsh_h5.base.RequestRule import RequestRule
 from test_lsh_mis.base.MisBasic import MisBasic
+from test_lsh_h5.base.H5Basic import H5Basic
 
 requestRule = RequestRule()
 class RegisterTest():
-    def __init__(self,host,appConfPath,testCasePath,testCaseDoc,testResultsPath):
+    def __init__(self,enverionment,host,h5ConfPath,testCasePath,testCaseDoc,testResultsPath):
         self.host = host
-        self.appConfPath = appConfPath
+        self.enverionment = enverionment
+        self.h5ConfPath = h5ConfPath
         self.testCaseDoc = testCaseDoc
         self.testCasePath = testCasePath
         self.testResultsPath = testResultsPath
 
     def registerTest(self):
         print "---------------注册接口测试开始---------------"
+        h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
+        session = h5Basic.getCookie()
         testCase = TestCase()
-        excel = testCase.getAppTestCase(self.testCasePath,self.testCaseDoc)
+        excel = testCase.getH5TestCase(self.testCasePath,self.testCaseDoc)
         sheet = excel.sheets()[0]
         nrows = sheet.nrows
         wb = copy(excel)
@@ -38,16 +42,18 @@ class RegisterTest():
                     count = random.randint(0000001,9999999)
                     cellphone = "1600"+str(count)#生成随机手机号
                     params['cellphone'] = int(cellphone)
-                    requestRule.get(self.host,"/captcha/sms/regSend","cellphone=" + cellphone)
+                    
+                    requestRule.get(session,self.host,"/captcha/sms/sendregister","cellphone=" + cellphone)
                     time.sleep(0.5)
-                    misConfPath = self.appConfPath.replace('app','mis')
+                    misConfPath = self.appConfPath.replace('h5','mis')
                     misBasic = MisBasic("qa",misConfPath)
                     verifyCode = misBasic.getVerifyCode(cellphone)
                     params['verify_code'] = verifyCode
                     
                     #print verifyCode
                 ws.write(i, 4, json.dumps(params))
-                results = requestRule.post(self.host, url, params)
+                
+                results = requestRule.post(session,self.host, url, params)
             # get请求
             elif sheet.cell(i, 2).value == 'get':
                 params = sheet.cell(i, 4).value
@@ -65,7 +71,7 @@ class RegisterTest():
                         inviteCode = row['invite_code']
                     params = params+"&invite_code="+inviteCode
                 ws.write(i, 4, params)
-                results = requestRule.get(self.host, url, params)
+                results = requestRule.get(session,self.host, url, params)
             resultTime = results[0]
             resultStatus = results[1]
             resultText = results[2]

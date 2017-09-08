@@ -21,6 +21,8 @@ class HomePageTest():
 
     def HomePageTest(self):
         print "---------------app首页接口测试开始---------------"
+        h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
+        session = h5Basic.getCookie()
         testCase = TestCase()
         excel = testCase.getH5TestCase(self.testCasePath,self.testCaseDoc)
         sheet = excel.sheets()[0]
@@ -29,8 +31,6 @@ class HomePageTest():
         ws = wb.get_sheet(0)
         amount = 0
         
-        h5Basic = H5Basic(self.enverionment,self.h5ConfPath)
-        session = h5Basic.getCookie()
         
         for i in range(1, nrows):
             url = sheet.cell(i, 3).value
@@ -40,8 +40,6 @@ class HomePageTest():
             if sheet.cell(i, 2).value == 'post':
                 params = eval(sheet.cell(i, 4).value)
                 
-                
-        
 
                 results = requestRule.post(session,self.host, url, params)
             # get请求
