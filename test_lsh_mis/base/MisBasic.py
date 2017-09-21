@@ -23,6 +23,7 @@ class MisBasic():
         host = misBase.getHost()
         headers = {'Cookie': self.getCookie()}
         result = requests.get(host + '/customermanage/user/searchverify?cellphone=' + username, headers=headers)
+        
         resultContent = result.json()['content'][0]
         verifyCode = resultContent['verify_code']
         return verifyCode

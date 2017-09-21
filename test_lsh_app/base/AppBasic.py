@@ -19,6 +19,8 @@ class AppBasic:
         headers = eval(base.getHeaders())
         params = {'username': username, 'password': password}
         result = requests.post(host + '/user/info/login', params = params)
+        
+        print result.json()
         if result.json()['ret'] == 1004 :
             #请求验证码
             requests.post(host + '/captcha/sms/sendVerifyUnusual?cellphone=' + username)
@@ -26,7 +28,9 @@ class AppBasic:
             #misHost = 'http://qa.market-mis.wmdev2.lsh123.com'
             misBasic = MisBasic(self.enverionment,misPath)
             verifyCode = misBasic.getVerifyCode(username)
+            
             user = {'username': username, 'password': password, 'verify_code': verifyCode}
             result = requests.post(host + '/user/info/login', params = user, headers=headers)
+            
         token = result.json()['content']['token']
         return token

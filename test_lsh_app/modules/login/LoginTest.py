@@ -8,7 +8,8 @@ from test_lsh_app.base.RequestRule import RequestRule
 
 requestRule = RequestRule()
 class LoginTest():
-    def __init__(self,host,testCasePath,testCaseDoc,testResultsPath):
+    
+    def __init__(self,enverionment,host,appConfpath,testCasePath,testCaseDoc,testResultsPath):
         self.host = host
         self.testCasePath = testCasePath
         self.testCaseDoc = testCaseDoc
