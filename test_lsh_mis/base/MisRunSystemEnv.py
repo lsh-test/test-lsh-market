@@ -21,4 +21,12 @@ class MisRunSystemEnv:
             pathList.append(testCasePath)
             pathList.append(testResultPath)
             return pathList
+        elif systemEnv== 'zyb':
+            confPath = "D://test-lsh-market//test_lsh_mis//conf/mis_config.ini"
+            testCasePath = "D://test-lsh-market//test_lsh_mis/misTestCase/"
+            testResultPath = "D://test-lsh-market//test_lsh_mis/misTestResults/"
+            pathList.append(confPath)
+            pathList.append(testCasePath)
+            pathList.append(testResultPath)
+            return pathList
 

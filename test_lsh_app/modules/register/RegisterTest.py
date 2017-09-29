@@ -44,6 +44,8 @@ class RegisterTest():
                     misBasic = MisBasic("qa",misConfPath)
                     verifyCode = misBasic.getVerifyCode(cellphone)
                     params['verify_code'] = verifyCode
+                    
+                    #print verifyCode
                 ws.write(i, 4, json.dumps(params))
                 results = requestRule.post(self.host, url, params)
             # get请求
@@ -81,5 +83,7 @@ class RegisterTest():
         print "case通过率为%.2f" % a + "%"
         resultTime = time.strftime('%Y-%m-%d')
         #wb.save(os.path.dirname(os.getcwd()) + '/appTestResults/registerTestResult_' + resultTime + '.xls')
-        wb.save(self.testResultsPath + 'registerTestResult_' + resultTime + '.xls')
+        resultFile = self.testResultsPath + 'registerTestResult_' + resultTime + '.xls'
+        wb.save(resultFile)
         print "---------------注册接口测试结束---------------"
+        return resultFile

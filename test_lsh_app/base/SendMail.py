@@ -16,7 +16,6 @@ class SendMail:
 
         subject = '测试'
         message['Subject'] = Header(subject, 'utf-8')
-
         message.attach(MIMEText('商城接口测试结果...\n', 'plain', 'utf-8'))
 
         for resultFile in resultFilesList:

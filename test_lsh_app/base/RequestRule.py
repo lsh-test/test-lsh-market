@@ -9,6 +9,7 @@ class RequestRule:
         resultlist = []
         try:
             result = requests.get(host + url + "?" + params)
+            
             responseTime = (result.elapsed.microseconds) / 1000
             ret = result.json()['ret']
             resultlist.append(responseTime)
@@ -23,6 +24,8 @@ class RequestRule:
         resultlist = []
         try:
             result = requests.post(host + url, params=params)
+            
+            
             responseTime = (result.elapsed.microseconds) / 1000
             ret = result.json()['ret']
             resultlist.append(responseTime)

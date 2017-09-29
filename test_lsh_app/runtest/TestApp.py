@@ -2,8 +2,6 @@
 import os
 import sys
 import unittest
- 
-reload(sys)
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 
 from test_lsh_app.base.SendMail import SendMail
@@ -33,53 +31,47 @@ class TestApp(unittest.TestCase):
     def tearDown(self):
         pass
 
-        #测试登录
+    def getargvs(self,name):
+        appBase = AppBase(self.enverionment,self.appConfpath,name)
+        testCaseDoc = appBase.getTestCaseDoc()
+        args = (self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        return args
+
+    #测试登录
     def testLogin(self):
-        appBase = AppBase(self.enverionment,self.appConfpath,"login")
-        testCaseDoc = appBase.getTestCaseDoc()#获得登录testcase文件
-        loginTest = LoginTest(self.host,self.testCasePath,testCaseDoc,self.testResultsPath)#登录测试
+        loginTest = LoginTest(*self.getargvs("login"))
         loginResultFile = loginTest.loginTest()
         testResultFilelist.append(loginResultFile)
 
-
     #测试注册
     def testRegister(self):
-        appBase = AppBase(self.enverionment,self.appConfpath,"register")
-        testCaseDoc = appBase.getTestCaseDoc()#获得注册testcase文件
-        registerTest = RegisterTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)#注册测试
-        registerTest.registerTest()
-        
+        registerTest = RegisterTest(*self.getargvs("register"))#注册测试
+        registerResultFile = registerTest.registerTest()
+        testResultFilelist.append(registerResultFile)
+
     #测试app首页
     def testHomePage(self):
-        appBase=AppBase(self.enverionment,self.appConfpath,"homepage")
-        testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
-        homepageTest=HomePageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
+        homepageTest=HomePageTest(*self.getargvs("homepage"))
         homepageResultFile = homepageTest.HomePageTest()
         testResultFilelist.append(homepageResultFile)
         
     #测试我的页面
     def testMyPage(self):
-        appBase=AppBase(self.enverionment,self.appConfpath,"mypage")
-        
-        testCaseDoc = appBase.getTestCaseDoc()#获得我的页面testcase文件
-        mypageTest=MyPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
-        mypageTest.MyPageTest()
+        mypageTest=MyPageTest(*self.getargvs("mypage"))
+        myResultFile = mypageTest.MyPageTest()
+        testResultFilelist.append(myResultFile)
+
     #测试购物车页面接口
     def testShoppingCartPage(self):
-        
-        appBase=AppBase(self.enverionment,self.appConfpath,"shopping_cart_page")
-        
-        testCaseDoc = appBase.getTestCaseDoc()#获得购物车页面testcase文件
-        shoppingCartpageTest=ShoppingCartPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
-        shoppingCartpageTest.ShoppingCartPageTest()
+        shoppingCartpageTest=ShoppingCartPageTest(*self.getargvs("shopping_cart_page"))
+        shoppingCartpageResultFile = shoppingCartpageTest.ShoppingCartPageTest()
+        testResultFilelist.append(shoppingCartpageResultFile)
+
     #测试分类页接口
     def testClassifyPage(self):
-        
-        appBase=AppBase(self.enverionment,self.appConfpath,"classifypage")
-        
-        testCaseDoc = appBase.getTestCaseDoc()#获得分类页面testcase文件
-        classifyPageTest=ClassifyPageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
-        classifyPageTest.ClassifyPageTest()
+        classifyPageTest=ClassifyPageTest(*self.getargvs("classifypage"))
+        classifyPageResultFile = classifyPageTest.ClassifyPageTest()
+        testResultFilelist.append(classifyPageResultFile)
     
     """ def createsuite(self):
         testunit=unittest.TestSuite()
@@ -98,13 +90,13 @@ class TestApp(unittest.TestCase):
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTest(TestApp("testLogin"))
-    #suite.addTest(TestApp("testRegister"))
+    suite.addTest(TestApp("testRegister"))
     suite.addTest(TestApp("testHomePage"))
-    #suite.addTest(TestApp("testMyPage"))
-    #suite.addTest(TestApp("testShoppingCartPage"))
-    #suite.addTest(TestApp("testClassifyPage"))
-    testGetResultFilelist = suite.addTest(TestApp("testSendResultFile"))
+    suite.addTest(TestApp("testMyPage"))
+    suite.addTest(TestApp("testShoppingCartPage"))
+    suite.addTest(TestApp("testClassifyPage"))
 
+    suite.addTest(TestApp("testSendResultFile"))#发邮件
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
