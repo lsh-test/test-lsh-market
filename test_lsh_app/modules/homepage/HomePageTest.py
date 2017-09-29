@@ -54,5 +54,9 @@ class HomePageTest():
         print "case通过率为%.2f" % a + "%"
         resultTime = time.strftime('%Y-%m-%d')
         #wb.save(os.path.dirname(os.getcwd()) + '/appTestResults/loginTestResult' + resultTime + '.xls')
-        wb.save(self.testResultsPath + 'HomePageTestResult_' + resultTime + '.xls')
+        resultFile = self.testResultsPath + 'HomePageTestResult_' + resultTime + '.xls'
+        wb.save(resultFile)
         print "---------------app首页接口测试结束---------------"
+        return resultFile
+
+

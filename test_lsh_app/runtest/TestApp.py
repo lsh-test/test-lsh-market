@@ -6,8 +6,8 @@ import unittest
 reload(sys)
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 
-
-from test_lsh_app.base.AppBase import AppBase  
+from test_lsh_app.base.SendMail import SendMail
+from test_lsh_app.base.AppBase import AppBase
 from test_lsh_app.base.AppRunSystemEnv import AppRunSystemEnv
 from test_lsh_app.modules.login.LoginTest import LoginTest
 from test_lsh_app.modules.register.RegisterTest import RegisterTest
@@ -18,9 +18,10 @@ from test_lsh_app.modules.classifypage.ClassifyPageTest import ClassifyPageTest
 
 #base_dir=str(os.path.dirname(os.path.dirname(__file__)))
 
-
+testResultFilelist = []
 class TestApp(unittest.TestCase):
     def setUp(self):
+
         self.enverionment = sys.argv[1]  # app环境
         appSysPath = AppRunSystemEnv()
         self.appConfpath = appSysPath.getPath(sys.argv[2])[0] #appConf路径
@@ -32,12 +33,14 @@ class TestApp(unittest.TestCase):
     def tearDown(self):
         pass
 
-    #测试登录
+        #测试登录
     def testLogin(self):
         appBase = AppBase(self.enverionment,self.appConfpath,"login")
         testCaseDoc = appBase.getTestCaseDoc()#获得登录testcase文件
         loginTest = LoginTest(self.host,self.testCasePath,testCaseDoc,self.testResultsPath)#登录测试
-        loginTest.loginTest()
+        loginResultFile = loginTest.loginTest()
+        testResultFilelist.append(loginResultFile)
+
 
     #测试注册
     def testRegister(self):
@@ -51,7 +54,8 @@ class TestApp(unittest.TestCase):
         appBase=AppBase(self.enverionment,self.appConfpath,"homepage")
         testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
         homepageTest=HomePageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
-        homepageTest.HomePageTest()
+        homepageResultFile = homepageTest.HomePageTest()
+        testResultFilelist.append(homepageResultFile)
         
     #测试我的页面
     def testMyPage(self):
@@ -84,15 +88,23 @@ class TestApp(unittest.TestCase):
             for testsuit in test_suite:
                 testunit.addTest(testsuit)
         return testunit"""
-        
+
+    #以邮件形式发送测试结果
+    def testSendResultFile(self):
+        sendMail = SendMail()
+        sendMail.mail(testResultFilelist)
+        #print testResultFilelist
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTest(TestApp("testLogin"))
-    suite.addTest(TestApp("testRegister"))
-    #suite.addTest(TestApp("testHomePage"))
+    #suite.addTest(TestApp("testRegister"))
+    suite.addTest(TestApp("testHomePage"))
     #suite.addTest(TestApp("testMyPage"))
     #suite.addTest(TestApp("testShoppingCartPage"))
     #suite.addTest(TestApp("testClassifyPage"))
+    testGetResultFilelist = suite.addTest(TestApp("testSendResultFile"))
+
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
