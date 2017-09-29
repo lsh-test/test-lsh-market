@@ -20,7 +20,6 @@ class AppBasic:
         params = {'username': username, 'password': password}
         result = requests.post(host + '/user/info/login', params = params)
         
-        print result.json()
         if result.json()['ret'] == 1004 :
             #请求验证码
             requests.post(host + '/captcha/sms/sendVerifyUnusual?cellphone=' + username)
