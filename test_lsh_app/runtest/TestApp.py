@@ -28,11 +28,13 @@ class TestApp(unittest.TestCase):
 
     def tearDown(self):
         pass
+
     def getargvs(self,name):
         appBase = AppBase(self.enverionment,self.appConfpath,name)
         testCaseDoc = appBase.getTestCaseDoc()
         args=(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         return args
+
     #测试登录
     def testLogin(self):
         #appBase = AppBase(self.enverionment,self.appConfpath,"login")
@@ -43,41 +45,26 @@ class TestApp(unittest.TestCase):
 
     #测试注册
     def testRegister(self):
-        appBase = AppBase(self.enverionment,self.appConfpath,"register")
-        testCaseDoc = appBase.getTestCaseDoc()#获得注册testcase文件
-        registerTest = RegisterTest(self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)#注册测试
+        registerTest = RegisterTest(*self.getargvs("register"))#注册测试
         registerTest.registerTest()
         
     #测试app首页
     def testHomePage(self):
-        #appBase=AppBase(self.enverionment,self.appConfpath,"homepage")
-        #testCaseDoc = appBase.getTestCaseDoc()#获得首页testcase文件
         homepageTest=HomePageTest(*self.getargvs("homepage"))
-        #homepageTest=HomePageTest(self.enverionment,self.host,self.appConfpath,self.testCasePath,testCaseDoc,self.testResultsPath)
         homepageTest.HomePageTest()
         
     #测试我的页面
     def testMyPage(self):
-        #appBase=AppBase(self.enverionment,self.appConfpath,"mypage")
-        
-        #testCaseDoc = appBase.getTestCaseDoc()#获得我的页面testcase文件
-        
         mypageTest=MyPageTest(*self.getargvs("mypage"))
         mypageTest.MyPageTest()
+
     #测试购物车页面接口
     def testShoppingCartPage(self):
-        
-        #appBase=AppBase(self.enverionment,self.appConfpath,"shopping_cart_page")
-        
-        #testCaseDoc = appBase.getTestCaseDoc()#获得购物车页面testcase文件
         shoppingCartpageTest=ShoppingCartPageTest(*self.getargvs("shopping_cart_page"))
         shoppingCartpageTest.ShoppingCartPageTest()
+
     #测试分类页接口
     def testClassifyPage(self):
-        
-        #appBase=AppBase(self.enverionment,self.appConfpath,"classifypage")
-        
-        #testCaseDoc = appBase.getTestCaseDoc()#获得分类页面testcase文件
         classifyPageTest=ClassifyPageTest(*self.getargvs("classifypage"))
         classifyPageTest.ClassifyPageTest()
     
