@@ -27,7 +27,7 @@ class SendMail:
             smtpObj = smtplib.SMTP()
             smtpObj.connect('smtp.qiye.163.com', 25)
             smtpObj.login(sender, 'Zhouxin111162')
-            smtpObj.sendmail(sender, receivers, message.as_string())
+            smtpObj.sendmail(sender, receivers.split(","), message.as_string())
             smtpObj.quit()
             print "邮件发送成功"
         except smtplib.SMTPException,e:
