@@ -7,7 +7,7 @@ from email.header import Header
 class SendMail:
     def mail(self,resultFilesList):
         sender = 'zhouxin@lsh123.com'
-        receivers = 'zhouxin901008@qq.com,zhouxin@lsh123.com'
+        receivers = 'zhouxin@lsh123.com,zhouxin901008@qq.com,zxin901008@163.com'
 
 
         message = MIMEMultipart()
