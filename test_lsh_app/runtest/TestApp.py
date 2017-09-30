@@ -16,10 +16,9 @@ from test_lsh_app.modules.classifypage.ClassifyPageTest import ClassifyPageTest
 
 #base_dir=str(os.path.dirname(os.path.dirname(__file__)))
 
-testResultFilelist = []
+testResultFilelist = []#存放测试结果文件的list
 class TestApp(unittest.TestCase):
     def setUp(self):
-
         self.enverionment = sys.argv[1]  # app环境
         appSysPath = AppRunSystemEnv()
         self.appConfpath = appSysPath.getPath(sys.argv[2])[0] #appConf路径

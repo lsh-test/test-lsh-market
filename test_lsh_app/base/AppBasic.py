@@ -28,7 +28,7 @@ class AppBasic:
             #misHost = 'http://qa.market-mis.wmdev2.lsh123.com'
             misBasic = MisBasic(self.enverionment,misPath)
             verifyCode = misBasic.getVerifyCode(username)
-            
+
             user = {'username': username, 'password': password, 'verify_code': verifyCode}
             result = requests.post(host + '/user/info/login', params = user, headers=headers)
             
